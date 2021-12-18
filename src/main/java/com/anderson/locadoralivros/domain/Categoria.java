@@ -1,14 +1,28 @@
 package com.anderson.locadoralivros.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Categoria {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity // Cria as entidades e tabelas do banco de dados de forma automática
+public class Categoria implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id //informar que esse Id é uma chave primária
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String descricao;
 	
-	private List<Livro>livros = new ArrayList();
+	@OneToMany(mappedBy = "categoria") // Mapeia a instancia da categoria de livros na classe livros na linha 22
+	private List<Livro>livros = new ArrayList<>();
 
 	public Categoria() { // Contrutor sem parâmetros com a super classe. 
 		super();
