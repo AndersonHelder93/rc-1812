@@ -13,15 +13,15 @@ import com.anderson.locadoralivros.sevice.DBService;
 public class DevConfig {
 
 	@Autowired
-	private DBService dService;
+	private DBService dbService;
 	
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String strategy;
 	
 	@Bean
-	public boolean instanciaBaseDeDaados() {
+	public boolean instanciaBaseDeDados() {
 		if(strategy.equals("create")) {
-			this.dService.instanciaBaseDeDados();
+			this.dbService.instanciaBaseDeDados();
 		}
 		return false;
 	}

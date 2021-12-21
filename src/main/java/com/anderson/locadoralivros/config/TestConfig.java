@@ -1,9 +1,10 @@
 package com.anderson.locadoralivros.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+
 
 import com.anderson.locadoralivros.sevice.DBService;
 
@@ -12,11 +13,11 @@ import com.anderson.locadoralivros.sevice.DBService;
 public class TestConfig {
 	
 	@Autowired
-	private DBService dbService;
+	private DBService dBService;
 	
-	@Bean
-	public void instanciaBaseDoeDados() {
-		this.dbService.instanciaBaseDeDados();
+	@Bean		
+	public void instanciaBaseDaDados() {
+		this.dBService.instanciaBaseDeDados();
 	}
 
 }
