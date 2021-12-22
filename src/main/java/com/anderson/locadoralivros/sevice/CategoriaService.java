@@ -1,5 +1,6 @@
 package com.anderson.locadoralivros.sevice;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class CategoriaService {
 
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = repository.findById(id);// Optional é um recurso contido na llibrary do JPA onde ele traz uma lista de categorias pelo seu ID
-		return obj.orElseThrow(() -> new ObjectNotFounException("Objeto não Encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFounException(""
+				+ "Objeto não Encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+	
+	public List<Categoria> findAll(){
+		return repository.findAll();
 	}
 }
