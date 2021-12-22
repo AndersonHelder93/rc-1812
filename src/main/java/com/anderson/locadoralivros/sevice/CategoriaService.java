@@ -25,4 +25,10 @@ public class CategoriaService {
 	public List<Categoria> findAll(){
 		return repository.findAll();
 	}
+	
+	public Categoria create(Categoria obj) {
+		obj.setDescricao(null); // Valor do ID é nulo para não houver erro ou problema na troca de um ID que ele traz automaticamente implementado
+		return repository.save(obj);
+	}
+
 }

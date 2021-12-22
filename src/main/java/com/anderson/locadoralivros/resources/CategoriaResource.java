@@ -1,5 +1,6 @@
 package com.anderson.locadoralivros.resources; // Pacote responsável por receber as requisições do frontend para o end point
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.anderson.locadoralivros.domain.Categoria;
 import com.anderson.locadoralivros.dtos.CategoriaDto;
@@ -35,5 +39,12 @@ public class CategoriaResource {       // localhost:8080/categorias/1
 		List<Categoria> list = service.findAll();
 		List<CategoriaDto> listDto = list.stream().map(obj -> new CategoriaDto(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Categoria> create(@RequestBody Categoria obj){
+		obj = service.create(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 }
