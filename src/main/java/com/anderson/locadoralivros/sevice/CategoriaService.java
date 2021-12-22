@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anderson.locadoralivros.domain.Categoria;
+import com.anderson.locadoralivros.dtos.CategoriaDto;
 import com.anderson.locadoralivros.repositories.CategoriaRepository;
 import com.anderson.locadoralivros.sevice.exceptions.ObjectNotFounException;
 
 @Service
 public class CategoriaService {
 
+	
 	@Autowired // implementação da lógica de négocio
 	private CategoriaRepository repository; // Injeta e traz as funcionalidades do objeto instanciado na classe repository, onde realiza as consultas e inserções de informações no banco de dados
 
@@ -31,4 +33,10 @@ public class CategoriaService {
 		return repository.save(obj);
 	}
 
+	public Categoria update(Integer id, CategoriaDto objDto) {
+		Categoria obj = findById(id);
+		obj.setNome(objDto.getNome());
+		obj.setDescricao(objDto.getDescricao());
+		return repository.save(obj);
+	}
 }
